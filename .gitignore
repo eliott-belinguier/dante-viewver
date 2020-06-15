@@ -1,0 +1,28 @@
+## Temporary editor files / directories
+
+*~
+'#*#'
+.flooignore
+.floo
+.vscode/
+.idea/
+
+## CMake configuration files
+
+cmake-build-debug/
+cmake-build-debug-system/
+CMakeLists.txt
+
+## Binaries files
+
+*.o
+*.a
+*.gc*
+vgcore.*
+**/unit_tests
+viewer
+
+## GDB Temporary files
+
+peda-session-*.txt
+.gdb_history
