@@ -30,14 +30,21 @@ static void set_char(int y, int x, char c)
     }
 }
 
-static void display_line(const char *line, int y, size_t x)
+static void display_line(const char *line, ssize_t tab_y, int y, size_t x)
 {
     int middle_x = COLS / 2;
     ssize_t tab_x = x - ((size_t) middle_x);
+    int i;
 
-    for (int i = 0; (tab_x < 0 || line[tab_x]) && i < COLS; i++, tab_x++)
+    for (i = 0; tab_y >= 0 && (tab_x < 0 || line[tab_x])
+        && i < COLS; i++, tab_x++) {
         if (tab_x >= 0)
             set_char(y, i, line[tab_x]);
+        else
+            set_char(y, i, WALL_CHAR);
+    }
+    for (; i < COLS; i++)
+        set_char(y, i, WALL_CHAR);
 }
 
 int display(map_t *map, size_t y, size_t x)
@@ -49,10 +56,8 @@ int display(map_t *map, size_t y, size_t x)
         return (0);
     middle_y = LINES / 2;
     tab_y = y - ((size_t) middle_y);
-    clear();
     for (int i = 0; (tab_y < 0 || map->data[tab_y]) && i < LINES; i++, tab_y++)
-        if (tab_y >= 0)
-            display_line(map->data[tab_y], i, x);
+        display_line(map->data[tab_y], tab_y, i, x);
     refresh();
     return (1);
 }

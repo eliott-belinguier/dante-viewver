@@ -20,7 +20,7 @@ CMakeLists.txt
 *.gc*
 vgcore.*
 **/unit_tests
-viewer
+viewver
 
 ## GDB Temporary files
 

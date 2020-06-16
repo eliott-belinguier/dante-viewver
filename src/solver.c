@@ -35,6 +35,7 @@ int start(map_t *map)
 
     keypad(window, TRUE);
     curs_set(0);
+    nodelay(window, true);
     init_colors();
     timeout(0);
     if (solve(map, 0, 0) == -1) {
