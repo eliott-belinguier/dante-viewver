@@ -51,13 +51,17 @@ int display(map_t *map, size_t y, size_t x)
 {
     int middle_y;
     ssize_t tab_y;
+    int i = 0;
 
     if (y >= map->height || x >= map->width)
         return (0);
     middle_y = LINES / 2;
     tab_y = y - ((size_t) middle_y);
-    for (int i = 0; (tab_y < 0 || map->data[tab_y]) && i < LINES; i++, tab_y++)
+    for (; (tab_y < 0 || map->data[tab_y]) && i < LINES; i++, tab_y++)
         display_line(map->data[tab_y], tab_y, i, x);
+    for (; i < LINES; i++)
+        for (int j = 0; j < COLS; j++)
+            set_char(i, j, WALL_CHAR);
     refresh();
     return (1);
 }
