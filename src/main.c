@@ -12,7 +12,7 @@ int main(int argc, char **argv)
         return (1);
     }
     map = read_file(argv[1]);
-    if (!map)
+    if (!map || !map->data || map->width * map->height == 0)
         return (1);
     return (start(map));
 }
