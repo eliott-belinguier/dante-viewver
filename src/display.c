@@ -12,7 +12,7 @@ static void set_char(int y, int x, char c)
         return;
     }
     switch (c) {
-        case WALL_CHAR:
+        default:
             attron(COLOR_PAIR(WALL));
             mvaddch(y, x, c);
             attroff(COLOR_PAIR(WALL));
